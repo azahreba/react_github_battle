@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
-import styles from '../styles';
-const {transparentBg} = styles;
+import Prompt from '../components/Prompt';
 
 class PromptContainer extends Component {
     constructor() {
@@ -13,34 +12,21 @@ class PromptContainer extends Component {
 
     render() {
         return (
-            <div className="jumbotron col-sm-6 col-sm-offset-3 text-center"
-                 style={transparentBg}>
-                <h1>{this.props.route.header}</h1>
-                <div className="col-sm-12">
-                    <form onSubmit={this.onSubmitUser.bind(this)}>
-                        <div className="form-group">
-                            <input type="text" className="form-control"
-                                   placeholder="Github Username"
-                                   onChange={this.onUpdateUser.bind(this)}/>
-                        </div>
-                        <div className="form-group col-sm-4 col-sm-offset-4">
-                            <button className="btn btn-block btn-success"
-                                    type="submit">Continue
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <Prompt
+                onSubmitUser={this.handleSubmitUser.bind(this)}
+                onUpdateUser={this.handleUpdateUser.bind(this)}
+                header={this.props.route.header}
+                username={this.state.username} />
         );
     }
 
-    onUpdateUser(e) {
+    handleUpdateUser(e) {
         this.setState({
             username: e.target.value
         });
     }
 
-    onSubmitUser(e) {
+    handleSubmitUser(e) {
         e.preventDefault();
         let {username} = this.state;
 
