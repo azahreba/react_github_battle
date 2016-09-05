@@ -2,7 +2,7 @@ import React, {Component, PropTypes } from 'react';
 
 import ConfirmBattle from '../components/ConfirmBattle';
 
-import githubhelpers from '../utils/githubHelpers';
+import githubHelpers from '../utils/githubHelpers';
 
 class ConfirmBattleContainer extends Component {
   constructor() {
@@ -17,13 +17,28 @@ class ConfirmBattleContainer extends Component {
     return (
       <ConfirmBattle
           isLoading={this.state.isLoading}
-          playersInfo={this.state.playersInfo} />
+          playersInfo={this.state.playersInfo}
+          onInitiate={this.handleInitiateBattle.bind(this)} />
     );
   }
 
   componentDidMount() {
     const query = this.props.location.query;
-    //Fetch info from github
+    
+    githubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
+        .then(playersInfo => {
+          this.setState({
+            isLoading: false,
+            playersInfo
+          });
+        });
+  }
+
+  handleInitiateBattle() {
+    this.context.router.push({
+        pathname: '/results',
+        state: this.state.playersInfo
+    });
   }
 
   static get contextTypes() {
