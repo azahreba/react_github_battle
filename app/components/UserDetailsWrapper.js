@@ -11,7 +11,4 @@ const UserDetailsWrapper = (props) => {
     );
 };
 
-UserDetailsWrapper.propTypes = {};
-UserDetailsWrapper.defaultProps = {};
-
 export default UserDetailsWrapper;
