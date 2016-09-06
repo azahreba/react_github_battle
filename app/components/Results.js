@@ -3,11 +3,9 @@ import React, {
 } from 'react';
 import {Link} from 'react-router';
 
-import styles from '../styles';
-const {transparentBg} = styles;
-
 import UserDetails from './UserDetails';
 import UserDetailsWrapper from './UserDetailsWrapper';
+import MainContainer from './MainContainer';
 
 const StartOver = () => {
     return (
@@ -45,7 +43,7 @@ const Results = (props) => {
     }
 
     return (
-        <div className="jumbotron col-sm-12 text-center" style={transparentBg}>
+        <MainContainer>
             <h1>Results</h1>
             <div className="col-sm-offset-2">
                 <UserDetailsWrapper header="Winner">
@@ -58,7 +56,7 @@ const Results = (props) => {
                     /></UserDetailsWrapper>
             </div>
             <StartOver />
-        </div>
+        </MainContainer>
     );
 };
 
