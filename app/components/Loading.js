@@ -21,15 +21,22 @@ const styles = {
 };
 
 class Loading extends Component {
-    static get ORIGINAL_TEXT() {
+    static get originalText(){
         return 'Loading';
     }
 
-    constructor() {
-        super();
-        this.state = {
-            text: this.ORIGINAL_TEXT
-        };
+    static get stopperText() {
+        return this.originalText + '...';
+    }
+
+    static get speed() {
+        return 300;
+    }
+
+    componentWillMount() {
+        this.setState({
+            text: this.constructor.originalText
+        });
     }
 
     render() {
@@ -39,24 +46,31 @@ class Loading extends Component {
             </div>
         );
     }
-
+    
     componentDidMount() {
-        const stopper = 'Loading...';
         this.interval = setInterval(() => {
-            if (this.state.text === stopper) {
+            if (this.state.text === this.constructor.stopperText) {
                 this.setState({
-                    text: this.ORIGINAL_TEXT
+                    text: this.constructor.originalText
                 });
             } else {
                 this.setState({
-                    text: this.text + '.'
+                    text: this.state.text + '.'
                 });
             }
-        }, 300);
+        }, this.constructor.speed);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 }
 
-Loading.propTypes = {};
-Loading.defaultProps = {};
+// Loading.defaultProps = {
+//     originalText: 'Loading',
+//     get stopperText() {
+//         return this.originalText + '...';
+//     }
+// };
 
 export default Loading;

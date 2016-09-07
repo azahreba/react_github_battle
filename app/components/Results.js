@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import UserDetails from './UserDetails';
 import UserDetailsWrapper from './UserDetailsWrapper';
 import MainContainer from './MainContainer';
+import Loading from './Loading';
 
 const StartOver = () => {
     return (
@@ -28,7 +29,7 @@ const Results = (props) => {
     if (props.isLoading) {
         return (
             <div className="jumbotron col-sm-12 text-center">
-                <h1>Loading...</h1>
+                <Loading/>
             </div>
         );
     }

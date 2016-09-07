@@ -4,11 +4,12 @@ import {Link} from 'react-router';
 import UserDetails from './UserDetails';
 import UserDetailsWrapper from './UserDetailsWrapper';
 import MainContainer from './MainContainer';
+import Loading from './Loading';
 
 function ConfirmBattle(props) {
   return (
       props.isLoading
-          ? <p>Loading...</p>
+          ? <Loading />
           : <MainContainer>
               <h1>Confirm Players</h1>
               <div className="col-md-6 col-sm-offset2">
